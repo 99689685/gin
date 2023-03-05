@@ -18,7 +18,7 @@ const (
 // 字典
 
 var Codemsg = map[int]string{
-	SUCCESS:             "ok",
+	SUCCESS:             "OK",
 	ERROR:               "FAIL",
 	ErrorUsernameUsed:   "用户名已存在!",
 	ErrorPasswordWorng:  "用户密码错误!",

@@ -10,6 +10,7 @@ import (
 
 type User struct {
 	gorm.Model
+	ID       uint
 	Username string `gorm:"type:varchar(20);not null " json:"username" validate:"required,min=4,max=12" label:"用户名"`
 	Password string `gorm:"type:varchar(500);not null" json:"password" validate:"required,min=6,max=120" label:"密码"`
 	Role     int    `gorm:"type:int;DEFAULT:2" json:"role" validate:"required,gte=2" label:"角色码"`
@@ -27,7 +28,7 @@ func CheckUser(name string) (code int) {
 
 // CreateUser 新增用户
 func CreateUser(data *User) int {
-	// 密码再写入数据库之前进行加密
+	/* 密码加密方案1: 密码再写入数据库之前进行加密*/
 	data.Password = ScryptPw(data.Password)
 	err := db.Create(&data).Error
 	if err != nil {
@@ -50,9 +51,23 @@ func GetUsers(username string, pageSize int, pageNum int) ([]User, int64) {
 
 //  编辑用户
 
-// 删除用户
+// DeleteUser 删除用户
+func DeleteUser(id int) int {
+	var user User
+	err = db.Where("id = ?", id).Delete(&user).Error
+	if err != nil {
+		return errmsg.ERROR
+	}
+	return errmsg.SUCCESS
+}
 
-// ScryptPw 密码加密
+/* ScryptPw 密码加密
+密码加密方案二:通过生命周期进行加密*/
+
+//func (u *User) BeforeSave() {
+//	u.Password = ScryptPw(u.Password)
+//}
+
 func ScryptPw(password string) string {
 	const KeyLen = 10
 	salt := make([]byte, 8)

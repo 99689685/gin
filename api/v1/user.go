@@ -39,7 +39,7 @@ func AddUser(c *gin.Context) {
 func QueryUsers(c *gin.Context) {
 	pageSize, _ := strconv.Atoi(c.Query("pagesize"))
 	pageNum, _ := strconv.Atoi(c.Query("pagenum"))
-	username := c.Query("username")
+	username := c.Param("username")
 	code = errmsg.SUCCESS
 	data, _ := model.GetUsers(username, pageSize, pageNum)
 	c.JSON(http.StatusOK, gin.H{
@@ -56,5 +56,11 @@ func EditUser(c *gin.Context) {
 
 // DeleteUser 删除用户
 func DeleteUser(c *gin.Context) {
-
+	param := c.Param("id")
+	id, _ := strconv.Atoi(param)
+	code = model.DeleteUser(id)
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"message": errmsg.GetErrMsg(code),
+	})
 }

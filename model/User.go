@@ -40,7 +40,7 @@ func CreateUser(data *User) int {
 // GetUsers 查询用户列表
 func GetUsers(username string, pageSize int, pageNum int) ([]User, int64) {
 	var users []User
-	err := db.Select("id,username,role").Where(
+	err := db.Select("id,username,role,created_at").Where(
 		"username LIKE ?", username+"%",
 	).Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&users).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
@@ -49,12 +49,21 @@ func GetUsers(username string, pageSize int, pageNum int) ([]User, int64) {
 	return users, 0
 }
 
+// FindUser 查询单个用户数据
+func FindUser(id string) (User, int) {
+	var users User
+	err := db.Limit(1).Where("ID = ?", id).Find(&users).Error
+	if err != nil {
+		return users, errmsg.ERROR
+	}
+	return users, errmsg.SUCCESS
+}
+
 // EditUser 编辑用户
 func EditUser(id int, data *User) int {
 	var user User
 	var maps = make(map[string]interface{})
 	maps["username"] = data.Username
-	maps["password"] = data.Password
 	maps["role"] = data.Role
 	err = db.Model(&user).Where("id = ? ", id).Updates(maps).Error
 	if err != nil {

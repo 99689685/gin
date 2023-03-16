@@ -13,6 +13,7 @@ const (
 	ErrorTokenRuntime   = 1005 // token超时
 	ErrorTokenWrong     = 1006 // token不合法
 	ErrorTokenTypeWrong = 1007
+	ErrorCateNameUsed   = 2001
 )
 
 // 字典
@@ -27,6 +28,7 @@ var Codemsg = map[int]string{
 	ErrorTokenRuntime:   "Token已过期!",
 	ErrorTokenWrong:     "Token不合法/错误!",
 	ErrorTokenTypeWrong: "Token格式错误!",
+	ErrorCateNameUsed:   "Tags分类已存在!",
 }
 
 // 输出错误信息

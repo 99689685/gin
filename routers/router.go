@@ -15,11 +15,15 @@ func InitRouter() {
 	{
 		// 用户模块口
 		router.GET("user", v1.QueryUsers)
+		router.GET("userDetails", v1.GetUser)
 		router.POST("user", v1.AddUser)
 		router.PUT("user/:id", v1.EditUser)
 		router.DELETE("user/:id", v1.DeleteUser)
 		// 分类模块接口
-
+		router.GET("category", v1.QueryCategory)
+		router.POST("category", v1.AddCategory)
+		router.PUT("category/:id", v1.EditCategory)
+		router.DELETE("category/:id", v1.DeleteCategory)
 		// 文章模块接口
 	}
 	r.Run(utils.HttpPort)

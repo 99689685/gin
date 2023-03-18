@@ -31,7 +31,7 @@ var Codemsg = map[int]string{
 	ErrorUserNotExist:   "用户不存在!",
 	ErrorTokenExist:     "Token不存在!",
 	ErrorTokenRuntime:   "Token已过期!",
-	ErrorTokenWrong:     "Token不合法/错误!",
+	ErrorTokenWrong:     "Token不合法/格式错误!",
 	ErrorTokenTypeWrong: "Token格式错误!",
 	ErrorArtNotExist:    "文章不存在",
 	ErrorCateNameUsed:   "Tags分类已存在!",

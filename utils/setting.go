@@ -9,6 +9,7 @@ var (
 	AppMode    string
 	HttpPort   string
 	Db         string
+	JwtKey     string
 	DbHost     string
 	DbPort     string
 	DbName     string
@@ -28,6 +29,7 @@ func init() {
 func loadServer(file *ini.File) {
 	AppMode = file.Section("server").Key("AppMode").MustString("debug")
 	HttpPort = file.Section("server").Key("HttpPort").MustString(":3000")
+	JwtKey = file.Section("server").Key("JwtKey").MustString(":j00k07w19")
 }
 func LoadData(file *ini.File) {
 	Db = file.Section("database").Key("Db").MustString("debug")

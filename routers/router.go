@@ -25,7 +25,10 @@ func InitRouter() {
 		router.PUT("category/:id", v1.EditCategory)
 		router.DELETE("category/:id", v1.DeleteCategory)
 		// 文章模块接口
-		router.GET("article", v1.GetArt)
+		router.GET("singleArticle/:id", v1.GetArtInfo)
+		router.GET("articleList", v1.GetCateArt)
+		//router.GET("article", v1.GetArtInfo)
+		router.GET("article", v1.GetArtInfo)
 		router.POST("article", v1.AddArticle)
 		router.PUT("article/:id", v1.EditArt)
 		router.DELETE("article/:id", v1.DeleteArt)

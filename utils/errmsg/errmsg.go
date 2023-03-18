@@ -13,7 +13,12 @@ const (
 	ErrorTokenRuntime   = 1005 // token超时
 	ErrorTokenWrong     = 1006 // token不合法
 	ErrorTokenTypeWrong = 1007
-	ErrorCateNameUsed   = 2001
+
+	// ErrorArtNotExist Articlemodule 文章模块的错误
+	ErrorArtNotExist = 2001
+	// ErrorCateNameUsed 分类模块的错误
+	ErrorCateNameUsed = 3001
+	ErrorCateNotExit  = 3002
 )
 
 // 字典
@@ -28,7 +33,9 @@ var Codemsg = map[int]string{
 	ErrorTokenRuntime:   "Token已过期!",
 	ErrorTokenWrong:     "Token不合法/错误!",
 	ErrorTokenTypeWrong: "Token格式错误!",
+	ErrorArtNotExist:    "文章不存在",
 	ErrorCateNameUsed:   "Tags分类已存在!",
+	ErrorCateNotExit:    "查询不到该分类！",
 }
 
 // 输出错误信息

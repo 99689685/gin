@@ -93,11 +93,29 @@ func DeleteUser(id int) int {
 func ScryptPw(password string) string {
 	const KeyLen = 10
 	salt := make([]byte, 8)
-	salt = []byte{12, 32, 4, 6, 66, 22, 222, 11}
+	salt = []byte{12, 32, 4, 43, 66, 22, 222, 11}
 	HashPw, err := scrypt.Key([]byte(password), salt, 16384, 8, 1, KeyLen)
 	if err != nil {
 		log.Fatal(err)
 	}
 	Fpw := base64.StdEncoding.EncodeToString(HashPw) //最后转成字符串
 	return Fpw
+}
+
+// CheckLogin 登陆验证
+func CheckLogin(username string, password string) int {
+	var user User
+	db.Where("username = ?", username).First(&user)
+	if user.ID == 0 {
+		return errmsg.ErrorUserNotExist
+	}
+	if ScryptPw(password) != user.Password {
+		return errmsg.ErrorPasswordWorng
+	}
+	if user.Role != 0 {
+		return errmsg.ErrorUserNopermissions
+	}
+
+	return errmsg.SUCCESS
+
 }

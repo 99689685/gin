@@ -32,7 +32,7 @@ func InitRouter() {
 		router.GET("category", v1.QueryCategory)
 		router.GET("singleArticle/:id", v1.GetArtInfo)
 		router.GET("articleList", v1.GetCateArt)
-		router.GET("article", v1.GetArtInfo)
+		router.GET("article", v1.GetArt)
 		router.POST("login", v1.LoginFront)
 		router.POST("user", v1.AddUser)
 	}

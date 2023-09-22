@@ -35,6 +35,7 @@ func InitRouter() {
 		router.GET("article", v1.GetArt)
 		router.POST("login", v1.LoginFront)
 		router.POST("user", v1.AddUser)
+		router.POST("addLeaver", v1.AddLeaver)
 	}
 	r.Run(utils.HttpPort)
 }

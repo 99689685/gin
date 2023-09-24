@@ -2,6 +2,7 @@ package model
 
 import (
 	"bytes"
+	"ginweb/utils"
 	"ginweb/utils/errmsg"
 	"github.com/goccy/go-json"
 	"net/http"
@@ -31,7 +32,7 @@ func CreateLeaver(data *Leaver) int {
 }
 
 func sendDingTalkMessage(title, message string) error {
-	url := "https://oapi.dingtalk.com/robot/send?access_token=657682661ec37b34f9ce617fea1ad05b9eb2f1aafc7fc25468951656f5fc5609"
+	url := utils.RobotWebhook
 	data := map[string]interface{}{
 		"msgtype": "markdown",
 		"markdown": map[string]interface{}{

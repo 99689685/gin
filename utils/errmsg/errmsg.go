@@ -17,6 +17,7 @@ const (
 	ErrorArtNotExist       = 2001
 	ErrorCateNameUsed      = 3001
 	ErrorCateNotExit       = 3002
+	ErrDingUser            = 4002
 )
 
 // 字典
@@ -35,6 +36,7 @@ var Codemsg = map[int]string{
 	ErrorArtNotExist:       "文章不存在",
 	ErrorCateNameUsed:      "Tags分类已存在!",
 	ErrorCateNotExit:       "查询不到该分类！",
+	ErrDingUser:            "钉钉 ACCESS_TOKEN 获取失败！",
 }
 
 // 输出错误信息
